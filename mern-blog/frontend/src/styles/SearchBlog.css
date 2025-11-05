@@ -1,0 +1,124 @@
+/* SearchBlog.css - Classic search bar with smooth dropdown slides */
+@import url('https://fonts.googleapis.com/css2?family=Georgia&family=Playfair+Display:wght@400;700&display=swap');
+
+.search-blog-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Georgia', serif;
+}
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  background: #fdfbf8;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-bar:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
+
+.search-input-container {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d4cab0;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #8b6f47;
+  box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.1);
+}
+
+.category-filter, .sort-filter {
+  padding: 0.75rem;
+  border: 1px solid #d4cab0;
+  border-radius: 4px;
+  background: white;
+  font-family: 'Georgia', serif;
+  transition: border-color 0.3s ease;
+}
+
+.category-filter:focus, .sort-filter:focus {
+  outline: none;
+  border-color: #8b6f47;
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem;
+  background: #8b6f47;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover { background: #7a5d38; transform: scale(1.05); }
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #d4cab0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 10;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  padding: 1rem;
+  border-bottom: 1px solid #f8f4ed;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdown-item:hover { background: #f8f4ed; }
+
+.dropdown-item h4 { margin: 0 0 0.5rem; color: #2c1810; }
+
+.blog-preview { margin: 0.5rem 0; color: #6b5e4a; font-size: 0.9rem; }
+
+.blog-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #8b6f47;
+}
+
+.loading { color: #6b5e4a; font-style: italic; }
+.no-results { color: #8b6f47; text-align: center; }
+
+.blog-result { text-decoration: none; color: #2c1810; transition: color 0.3s ease; }
+.blog-result:hover { color: #4a3728; }
+
+* { box-sizing: border-box; }
+
+@media (max-width: 600px) {
+  .search-bar { flex-direction: column; }
+}

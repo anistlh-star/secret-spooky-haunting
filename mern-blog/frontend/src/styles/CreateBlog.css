@@ -1,0 +1,141 @@
+/* CreateBlog.css & EditBlog.css */
+.create-blog-container, .edit-blog-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: slideUp 0.6s ease-out;
+}
+
+.create-blog-title, .edit-blog-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.create-blog-form, .edit-blog-form {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.create-blog-input, .edit-blog-input {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+.create-blog-input:focus, .edit-blog-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.create-blog-textarea, .edit-blog-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+.create-blog-textarea:focus, .edit-blog-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.create-blog-form label, .edit-blog-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.create-blog-form input[type="file"], .edit-blog-form input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px dashed #cbd5e0;
+  border-radius: 15px;
+  background: #f7fafc;
+  transition: all 0.3s ease;
+}
+
+.create-blog-form input[type="file"]:hover, .edit-blog-form input[type="file"]:hover {
+  border-color: #667eea;
+  background: #edf2f7;
+}
+
+.create-blog-button, .save-button, .delete-button {
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.5rem;
+}
+
+.create-blog-button, .save-button {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+  box-shadow: 0 5px 20px rgba(72, 187, 120, 0.3);
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #f56565, #e53e3e);
+  color: white;
+  box-shadow: 0 5px 20px rgba(245, 101, 101, 0.3);
+}
+
+.create-blog-button:hover, .save-button:hover, .delete-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.edit-blog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Dark Mode */
+.dark .create-blog-form, .dark .edit-blog-form {
+  background: #2d3748;
+  color: #e2e8f0;
+}
+
+.dark .create-blog-input, .dark .edit-blog-input,
+.dark .create-blog-textarea, .dark .edit-blog-textarea {
+  background: #4a5568;
+  border-color: #718096;
+  color: #e2e8f0;
+}
+
+.dark .create-blog-form label, .dark .edit-blog-form label {
+  color: #e2e8f0;
+}
