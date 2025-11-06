@@ -71,7 +71,7 @@ const UserProfile = () => {
                 src={
                   blog.image.startsWith("https")
                     ? blog.image
-                    : `https://secret-spooky-haunting-g4vw7pwp7w6w3995j-5000.app.github.dev/uploads/${blog.image}`
+                    : `https://secret-spooky-haunting-2.onrender.com/uploads/${blog.image}`
                 }
                 alt="Blog"
                 style={{ width: "300px", height: "auto" }}
