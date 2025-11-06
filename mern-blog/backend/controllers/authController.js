@@ -49,7 +49,6 @@ export const login = async (req, res) => {
         id: user._id,
         name: user.name, // ← Make sure this is included
         email: user.email,
-        isAdmin: user.isAdmin || "Not admin",
       },
       process.env.JWT_SECRET,
       {
