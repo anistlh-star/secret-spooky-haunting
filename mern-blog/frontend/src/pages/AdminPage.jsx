@@ -99,7 +99,7 @@ const AdminPanel = () => {
                     src={
                       b.image.startsWith("https")
                         ? b.image
-                        : `https://secret-spooky-haunting-g4vw7pwp7w6w3995j-5000.app.github.dev/uploads/${b.image}`
+                        : `https://secret-spooky-haunting-2.onrender.com/uploads/${b.image}`
                     }
                     alt="Blog"
                     className="blog-image"
