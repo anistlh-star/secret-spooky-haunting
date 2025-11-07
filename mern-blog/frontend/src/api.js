@@ -1,11 +1,16 @@
 // frontend/src/api.js
 import axios from "axios";
 
-// Use environment variable with fallback
+
 const API_BASE_URL =
-  "https://secret-spooky-haunting-g4vw7pwp7w6w3995j-5000.app.github.dev/api" ||
   import.meta.env.VITE_API_BASE_URL ||
   "https://secret-spooky-haunting-2.onrender.com/api";
+
+// // Use environment variable with fallback
+// const API_BASE_URL =
+//   "https://secret-spooky-haunting-g4vw7pwp7w6w3995j-5000.app.github.dev/api" ||
+//   import.meta.env.VITE_API_BASE_URL ||
+//   "https://secret-spooky-haunting-2.onrender.com/api";
 const API = axios.create({
   baseURL: API_BASE_URL,
 });
