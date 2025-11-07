@@ -72,30 +72,33 @@ const AdminPanel = () => {
       console.log({ message: "error deleting blogs in admin panel", error });
     }
   };
-const toggleUserAdmin = async (userId, makeAdmin) => {
-  try {
-    const token = localStorage.getItem("token");
-    console.log("🔍 Frontend - Sending request with token:", token ? "Yes" : "No");
-    
-    const res = await API.patch(
-      `/admin/users/${userId}/admin`,
-      { makeAdmin },
-      {
-        headers: { 
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-      }
-    );
-    console.log("User admin status updated:", res.data);
-    alert(res.data.message);
-    navigate("/admin");
-    fetchUser();
-  } catch (error) {
-    console.error("Error updating user admin status:", error);
-    alert(error.response?.data?.message || "Error updating user");
-  }
-};
+  const toggleUserAdmin = async (userId, makeAdmin) => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log(
+        "🔍 Frontend - Sending request with token:",
+        token ? "Yes" : "No"
+      );
+
+      const res = await API.patch(
+        `/admin/users/${userId}/admin`,
+        { makeAdmin },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("User admin status updated:", res.data);
+      alert(res.data.message);
+      navigate("/admin");
+      fetchUser();
+    } catch (error) {
+      console.error("Error updating user admin status:", error);
+      alert(error.response?.data?.message || "Error updating user");
+    }
+  };
 
   const handleDeleteUser = async (userId) => {
     if (
@@ -199,19 +202,25 @@ const toggleUserAdmin = async (userId, makeAdmin) => {
                   </span>
                 </p>
                 <div className="user-actions">
-                  <button
-                    className={`btn-${u.isAdmin ? "demote" : "promote"}`}
-                    onClick={() => toggleUserAdmin(u._id, !u.isAdmin)}
-                  >
-                    {u.isAdmin ? "Demote to User" : "Promote to Admin"}
-                  </button>
-                  <button
-                    className="btn-delete"
-                    onClick={() => handleDeleteUser(u._id)}
-                    disabled={u.isAdmin} // Prevent deleting other admins easily
-                  >
-                    Delete User
-                  </button>
+                  {u.isAdmin == true ? (
+                    <p>{""}</p>
+                  ) : (
+                    <>
+                      <button
+                        className={`btn-${u.isAdmin ? "demote" : "promote"}`}
+                        onClick={() => toggleUserAdmin(u._id, !u.isAdmin)}
+                      >
+                        {u.isAdmin ? "Demote to User" : "Promote to Admin"}
+                      </button>
+                      <button
+                        className="btn-delete"
+                        onClick={() => handleDeleteUser(u._id)}
+                        disabled={u.isAdmin} // Prevent deleting other admins easily
+                      >
+                        Delete User
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
