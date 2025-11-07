@@ -1,0 +1,124 @@
+/* UserProfile.css - Classic profile with smooth card flips */
+@import url('https://fonts.googleapis.com/css2?family=Georgia&family=Playfair+Display:wght@400;700&display=swap');
+
+.user-profile-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: 'Georgia', serif;
+  background: #fdfbf8;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.user-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f4ed, #e0d7c3);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.user-header:hover { transform: scale(1.01); }
+
+.user-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #2c1810;
+  margin: 0 0 1rem;
+}
+
+.user-email, .user-join-date, .user-blog-count {
+  font-size: 1.1rem;
+  color: #4a3728;
+  margin: 0.5rem 0;
+  opacity: 0.9;
+}
+
+.user-blogs {
+  margin-top: 2rem;
+}
+
+.blogs-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #2c1810;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e0d7c3;
+  padding-bottom: 0.5rem;
+}
+
+.blog-card {
+  background: white;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.blog-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.blog-title {
+  font-size: 1.4rem;
+  color: #2c1810;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-title:hover { color: #4a3728; }
+
+.blog-content {
+  color: #6b5e4a;
+  margin: 1rem 0;
+}
+
+.blog-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: #8b6f47;
+  margin-top: 1rem;
+}
+
+.blog-info span {
+  margin: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.blog-info span:hover { color: #2c1810; }
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #4a3728;
+}
+
+.no-blogs { text-align: center; color: #6b5e4a; font-style: italic; }
+
+img { max-width: 100%; height: auto; border-radius: 4px; }
+
+* { box-sizing: border-box; }
+
+@media (max-width: 600px) {
+  .blog-info { flex-direction: column; }
+  .user-title { font-size: 2.2rem; }
+}
