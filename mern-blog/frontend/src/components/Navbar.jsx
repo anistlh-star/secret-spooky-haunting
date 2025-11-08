@@ -112,8 +112,8 @@ const Navbar = () => {
                 Create Blog
               </Link>
               <Link 
-                className={`nav-link ${isActiveLink("/my-blogs")}`} 
-                to="/my-blogs"
+                className={`nav-link ${isActiveLink("/myblogs")}`} 
+                to="/myblogs"
               >
                 My Blogs
               </Link>
@@ -195,8 +195,8 @@ const Navbar = () => {
                 Create Blog
               </Link>
               <Link 
-                className={`nav-link ${isActiveLink("/my-blogs")}`} 
-                to="/my-blogs"
+                className={`nav-link ${isActiveLink("/myblogs")}`} 
+                to="/myblogs"
                 onClick={closeMobileMenu}
               >
                 My Blogs

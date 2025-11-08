@@ -22,6 +22,7 @@ import {
   deleteBlog,
   getSingleBlog,
   searchBlog,
+  getMyBlog,
 } from "../controllers/postController.js";
 
 import {
@@ -44,6 +45,7 @@ import { removeBlogImage } from "../controllers/imageController.js";
 
 router.get("/", getBlogs);
 router.get("/rawg", handleGameBlogs);
+router.get("/myblogs", authMiddleware, getMyBlog);
 
 router.get("/search", searchBlog); // Specific route first
 router.get("/:id", getSingleBlog); // Catch-all route last

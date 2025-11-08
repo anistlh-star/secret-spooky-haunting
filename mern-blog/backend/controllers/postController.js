@@ -101,13 +101,19 @@ export const updateBlog = async (req, res) => {
     console.log("📝 Update request received:", {
       body: req.body,
       file: req.file,
-      params: req.params
+      params: req.params,
     });
 
     const { title, content, category, image } = req.body;
     const newImage = req.file ? req.file.filename : undefined;
-    
-    console.log("parsed data : ", { title, content, category, image, newImage });
+
+    console.log("parsed data : ", {
+      title,
+      content,
+      category,
+      image,
+      newImage,
+    });
 
     const existingBlog = await Blog.findById(req.params.id);
     if (!existingBlog) {
@@ -118,7 +124,7 @@ export const updateBlog = async (req, res) => {
     if (existingBlog.author.toString() !== req.user.id && !req.user.isAdmin) {
       return res.status(403).json({ message: "Not authorized!" });
     }
-   const updatedData = { title, content, category };
+    const updatedData = { title, content, category };
 
     // ✅ SIMPLER: Set image to null instead of undefined
     if (image === null || image === "null") {
@@ -135,10 +141,9 @@ export const updateBlog = async (req, res) => {
       updatedData,
       { new: true }
     ).populate("author", "name _id");
-    
+
     console.log("✅ Blog Updated! Final blog data:", updatedBlog);
     res.json({ message: "Updated Blog!", blog: updatedBlog });
-    
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Update failed" });
@@ -159,6 +164,39 @@ export const deleteBlog = async (req, res) => {
   } catch (error) {
     console.error("Error deleting blog !! ", error);
     res.status(500).json({ message: "delete blog Error" });
+  }
+};
+export const getMyBlog = async (req, res) => {
+  try {
+    console.log('getMyBlog called');
+    console.log('req.user:', req.user);
+
+    if (!req.user?._id) {
+      return res.status(401).json({
+        success: false,
+        message: "User not authenticated",
+      });
+    }
+
+    const userId = req.user._id;
+
+    const blogs = await Blog.find({ author: userId })
+      .populate("author", "name email isAdmin")
+      .sort({ createdAt: -1 });
+
+    console.log(`Found ${blogs.length} blogs for user ${userId}`);
+
+    res.json({
+      success: true,
+      blogs,
+      count: blogs.length,
+    });
+  } catch (error) {
+    console.error("Error in getMyBlog:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 };
 export const searchBlog = async (req, res) => {

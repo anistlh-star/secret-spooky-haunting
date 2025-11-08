@@ -13,8 +13,107 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add these to your UserProfile.css */
+.current-user-badge {
+  background: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.admin-badge {
+  background: #FF9800;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.admin-actions {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border-left: 4px solid #FF9800;
+}
+
+.admin-actions h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.btn-admin-toggle {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-admin-toggle.make-admin {
+  background: #28a745;
+  color: white;
+}
+
+.btn-admin-toggle.remove-admin {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-admin-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.edit-blog-btn {
+  background: #2196F3;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.edit-blog-btn:hover {
+  background: #1976D2;
+}
+
+.blog-image {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+}
+
+.error {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #dc3545;
 }
 
 .user-header {
@@ -26,7 +125,9 @@
   transition: transform 0.3s ease;
 }
 
-.user-header:hover { transform: scale(1.01); }
+.user-header:hover {
+  transform: scale(1.01);
+}
 
 .user-title {
   font-family: 'Playfair Display', serif;
@@ -35,7 +136,9 @@
   margin: 0 0 1rem;
 }
 
-.user-email, .user-join-date, .user-blog-count {
+.user-email,
+.user-join-date,
+.user-blog-count {
   font-size: 1.1rem;
   color: #4a3728;
   margin: 0.5rem 0;
@@ -66,8 +169,15 @@
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .blog-card:hover {
@@ -82,7 +192,9 @@
   transition: color 0.3s ease;
 }
 
-.blog-title:hover { color: #4a3728; }
+.blog-title:hover {
+  color: #4a3728;
+}
 
 .blog-content {
   color: #6b5e4a;
@@ -103,22 +215,40 @@
   transition: color 0.3s ease;
 }
 
-.blog-info span:hover { color: #2c1810; }
+.blog-info span:hover {
+  color: #2c1810;
+}
 
-.loading, .error {
+.loading,
+.error {
   text-align: center;
   padding: 2rem;
   font-size: 1.2rem;
   color: #4a3728;
 }
 
-.no-blogs { text-align: center; color: #6b5e4a; font-style: italic; }
+.no-blogs {
+  text-align: center;
+  color: #6b5e4a;
+  font-style: italic;
+}
 
-img { max-width: 100%; height: auto; border-radius: 4px; }
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 @media (max-width: 600px) {
-  .blog-info { flex-direction: column; }
-  .user-title { font-size: 2.2rem; }
+  .blog-info {
+    flex-direction: column;
+  }
+
+  .user-title {
+    font-size: 2.2rem;
+  }
 }

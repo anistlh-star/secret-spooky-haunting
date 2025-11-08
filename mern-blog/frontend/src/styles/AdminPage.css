@@ -20,7 +20,103 @@ body.dark {
   gap: 10px;
   margin-top: 10px;
 }
+/* Add these to your existing AdminPage.css */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+}
 
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.blog-meta {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.current-user-note {
+  color: #666;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.user-label {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.admin-label {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.btn-promote {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.btn-demote {
+  background: #ffc107;
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.btn-delete-user {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.btn-delete-user:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.btn-approve {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.user-actions, .blog-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
 .btn-promote {
   background-color: #28a745;
   color: white;

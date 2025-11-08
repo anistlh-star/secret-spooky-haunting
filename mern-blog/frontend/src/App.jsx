@@ -12,6 +12,7 @@ import SingleBlog from "./pages/SingleBlog.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import AdminPanel from "./pages/AdminPage.jsx";
 import AdminStats from './pages/AdminStats.jsx'
+import MyBlogs from "./pages/MyBlogs.jsx";
 function App() {
   return (
     <div>
@@ -27,7 +28,7 @@ function App() {
           <Route path="/user/:id" element={<UserProfile />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/adminstats" element={<AdminStats />} />
-
+          <Route path="/myblogs" element={<MyBlogs />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Routes>

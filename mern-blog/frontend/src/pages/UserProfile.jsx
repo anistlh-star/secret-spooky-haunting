@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import API from "../api.js";
 import "../styles/UserProfile.css";
+import { useAuth } from "../contexts/AuthContext.jsx";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -10,6 +11,7 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user: currentUser, isAdmin } = useAuth();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -43,6 +45,38 @@ const UserProfile = () => {
     }
   }, [id, navigate]);
 
+  // 🎯 NEW: Function to handle admin actions
+  const handleToggleAdmin = async () => {
+    if (
+      !window.confirm(
+        `Are you sure you want to ${
+          user.isAdmin ? "remove admin rights from" : "make"
+        } ${user.name}?`
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const res = await API.patch(
+        `/admin/users/${user._id}/admin`,
+        { makeAdmin: !user.isAdmin },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      alert(res.data.message);
+      // Refresh the user data
+      setUser({ ...user, isAdmin: !user.isAdmin });
+    } catch (error) {
+      console.error("❌ Error updating admin status:", error);
+      alert(error.response?.data?.message || "Error updating admin status");
+    }
+  };
+
   if (loading) return <div className="loading">Loading user profile...</div>;
   if (!user) return <div className="error">User not found!</div>;
 
@@ -51,11 +85,37 @@ const UserProfile = () => {
       <div className="user-header">
         <h1 className="user-title">{user.name}'s Profile</h1>
         <p className="user-email">📧 {user.email}</p>
+
+        {/* 🎯 NEW: Show if this is YOUR profile */}
+        {currentUser && currentUser.id === user._id && (
+          <div className="current-user-badge">👋 This is your profile!</div>
+        )}
+
+        {/* 🎯 NEW: Show admin badge */}
+        {user.isAdmin && <div className="admin-badge">👑 Admin User</div>}
+
         <p className="user-join-date">
-          🗓️ Joined: {new Date(user.joinDate).toLocaleDateString()}
+          🗓️ Joined:{" "}
+          {new Date(user.createdAt || user.joinDate).toLocaleDateString()}
         </p>
-        <p className="user-blog-count">📝 {user.blogCount} Blogs Written</p>
+        <p className="user-blog-count">📝 {blogs.length} Blogs Written</p>
+
+        {/* 🎯 NEW: Admin actions */}
+        {isAdmin && currentUser && currentUser.id !== user._id && (
+          <div className="admin-actions">
+            <h3>Admin Actions:</h3>
+            <button
+              className={`btn-admin-toggle ${
+                user.isAdmin ? "remove-admin" : "make-admin"
+              }`}
+              onClick={handleToggleAdmin}
+            >
+              {user.isAdmin ? "👑 Remove Admin Rights" : "⭐ Make Admin"}
+            </button>
+          </div>
+        )}
       </div>
+
       <div className="user-blogs">
         <h2 className="blogs-title">{user.name}'s Blogs</h2>
         {blogs.length === 0 ? (
@@ -66,17 +126,17 @@ const UserProfile = () => {
               <Link to={`/blogs/${blog._id}`} className="blog-title">
                 <h3>{blog.title}</h3>
               </Link>
-                  {blog.image && (
-              <img
-                src={
-                  blog.image.startsWith("https")
-                    ? blog.image
-                    : `https://secret-spooky-haunting-g4vw7pwp7w6w3995j-5000.app.github.dev/uploads/${blog.image}`
-                }
-                alt="Blog"
-                style={{ width: "300px", height: "auto" }}
-              />
-            )}
+              {blog.image && (
+                <img
+                  src={
+                    blog.image.startsWith("https")
+                      ? blog.image
+                      : `https://secret-spooky-haunting-g4vw7pwp7w6w3995j-5000.app.github.dev/uploads/${blog.image}`
+                  }
+                  alt="Blog"
+                  className="blog-image"
+                />
+              )}
               <p className="blog-content">
                 {blog.content.substring(0, 100)}...
               </p>
@@ -84,14 +144,20 @@ const UserProfile = () => {
                 <span className="blog-category">
                   🏷️ {blog.category || "Uncategorized"}
                 </span>
-                <span className="blog-likes">❤️ {blog.likes} likes</span>
-                <span className="blog-likes">
-                 💬 {blog.comments.length}
+                <span className="blog-likes">❤️ {blog.likes || 0} likes</span>
+                <span className="blog-comments">
+                  💬 {blog.comments?.length || 0} comments
                 </span>
-
                 <span className="blog-date">
                   📅 {new Date(blog.createdAt).toLocaleDateString()}
                 </span>
+
+                {/* 🎯 NEW: Show edit button if it's your blog */}
+                {currentUser && currentUser.id === user._id && (
+                  <Link to={`/edit-blog/${blog._id}`} className="edit-blog-btn">
+                    ✏️ Edit
+                  </Link>
+                )}
               </div>
             </div>
           ))

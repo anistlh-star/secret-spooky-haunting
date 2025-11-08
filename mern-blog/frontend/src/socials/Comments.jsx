@@ -1,6 +1,7 @@
 // frontend/src/components/Comments.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"; // ← ADD THIS
 import API from "../api.js";
 import "../styles/Comments.css";
 
@@ -14,8 +15,9 @@ const Comments = () => {
   const [replyText, setReplyText] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // 🎯 USE AUTHCONTEXT INSTEAD OF MANUAL TOKEN PARSING
+  const { user, isAdmin } = useAuth();
   const token = localStorage.getItem("token");
-  const user = token ? JSON.parse(atob(token.split(".")[1])) : null;
 
   useEffect(() => {
     fetchComments();
@@ -107,9 +109,10 @@ const Comments = () => {
     setEditText("");
   };
 
+  // 🎯 UPDATED PERMISSION CHECK WITH AUTHCONTEXT
   const canModify = (comment) => {
     if (!user) return false;
-    return user.id === comment.user.toString() || user.isAdmin;
+    return user.id === comment.user.toString() || isAdmin;
   };
 
   const getUserInitial = (name) => {
@@ -168,7 +171,8 @@ const Comments = () => {
                   </div>
                   <span className="user-name">
                     {comment.user?.name || "User"}
-                    {user?.isAdmin && (
+                    {/* 🎯 UPDATED ADMIN BADGE CHECK */}
+                    {comment.user?.isAdmin && (
                       <span className="admin-badge">ADMIN</span>
                     )}
                   </span>
@@ -180,7 +184,8 @@ const Comments = () => {
                 </div>
 
                 {/* REPLY BUTTON */}
-                {token && (
+                {/* 🎯 UPDATED AUTH CHECK */}
+                {user && (
                   <button
                     className="btn btn-reply"
                     onClick={() =>
@@ -239,7 +244,7 @@ const Comments = () => {
                 )}
 
                 {/* RENDER REPLIES */}
-                      <h4>Replies : </h4>
+                <h4>Replies : </h4>
 
                 {comment.replies?.length > 0 && (
                   <div className="replies-container">
@@ -252,16 +257,17 @@ const Comments = () => {
                         <span className="reply-date">
                           📅 {new Date(reply.createdAt).toLocaleString()}
                         </span>
-                        {canModify(comment) && (
+                        {/* 🎯 UPDATED PERMISSION CHECK FOR REPLIES */}
+                        {canModify(reply) && (
                           <div className="comment-actions">
                             <button
-                              onClick={() => startEdit(comment)}
+                              onClick={() => startEdit(reply)}
                               className="btn btn-edit"
                             >
                               ✏️
                             </button>
                             <button
-                              onClick={() => deleteComment(comment._id)}
+                              onClick={() => deleteComment(reply._id)}
                               className="btn btn-delete"
                             >
                               🗑️
@@ -278,7 +284,8 @@ const Comments = () => {
         </div>
 
         {/* ADD COMMENT FORM */}
-        {token && !editingId && (
+        {/* 🎯 UPDATED AUTH CHECK */}
+        {user && !editingId && (
           <form onSubmit={addComment} className="comment-form">
             <div className="form-group">
               <textarea
@@ -295,7 +302,8 @@ const Comments = () => {
           </form>
         )}
 
-        {!token && (
+        {/* 🎯 UPDATED AUTH CHECK */}
+        {!user && (
           <div className="login-prompt">Please log in to leave a comment</div>
         )}
       </div>
