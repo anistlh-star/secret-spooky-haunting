@@ -139,9 +139,9 @@ const Navbar = () => {
             </>
           )}
           
-          <button onClick={toggleDarkMode} className="dark-toggle">
+          {/* <button onClick={toggleDarkMode} className="dark-toggle">
             {darkModeOn ? "☀️ Light" : "🌙 Dark"}
-          </button>
+          </button> */}
         </div>
 
         {/* Mobile Menu Button */}
@@ -226,9 +226,9 @@ const Navbar = () => {
           )}
           
           <div className="mobile-menu-actions">
-            <button onClick={toggleDarkMode} className="dark-toggle">
+            {/* <button onClick={toggleDarkMode} className="dark-toggle">
               {darkModeOn ? "☀️ Light Mode" : "🌙 Dark Mode"}
-            </button>
+            </button> */}
             {userName && (
               <span className="user-welcome-mobile">Welcome, {userName}</span>
             )}
